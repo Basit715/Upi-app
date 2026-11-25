@@ -8,9 +8,9 @@ if "balance" not in st.session_state:
     st.session_state.balance = 11050.00
 if "transactions" not in st.session_state:
     st.session_state.transactions = [
-        {"name": "Sahil", "amount": 700.00, "kind": "Sent", "status": "Demo", "time": "Today, 01:04 AM"},
-        {"name": "Ayaan", "amount": 299.90, "kind": "Received", "status": "Demo", "time": "Yesterday, 07:24 PM"},
-        {"name": "Rizwan", "amount": 299.99, "kind": "Sent", "status": "Demo", "time": "Yesterday, 07:22 PM"},
+        {"name": "Sahil", "amount": 700.00, "kind": "Sent", "status": "success", "time": "Today, 01:04 AM"},
+        {"name": "Ayaan", "amount": 299.90, "kind": "Received", "status": "success", "time": "Yesterday, 07:24 PM"},
+        {"name": "Rizwan", "amount": 299.99, "kind": "Sent", "status": "success", "time": "Yesterday, 07:22 PM"},
     ]
 if "selected_recipient" not in st.session_state:
     st.session_state.selected_recipient = ""
@@ -83,7 +83,7 @@ with pillcols[0]:
 with pillcols[1]:
     st.markdown('<div class="pill">🟢 History<br>See all</div>', unsafe_allow_html=True)
 with pillcols[2]:
-    st.markdown('<div class="pill">🚀 UPI Demo</div>', unsafe_allow_html=True)
+    st.markdown('<div class="pill">🚀 UPI Lite</div>', unsafe_allow_html=True)
 
 if st.session_state.show_balance:
     st.markdown(f"""
