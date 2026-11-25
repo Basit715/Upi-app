@@ -21,7 +21,7 @@ st.markdown("""
 .hero h1 {color:white;margin:0;} .hero p {margin-bottom:0;}
 </style>
 <div class="demo-banner"></div>
-<div class="hero"><h1>💸 UPI Pay</h1><p>Pay. Send. Receive.</p><p><b>Demo profile: Basit Abass</b></p></div>
+<div class="hero"><h1>💸 UPI Pay</h1><p>Pay. Send. Receive.</p><p><b>Basit Abass</b></p></div>
 """, unsafe_allow_html=True)
 
 st.subheader("Accounts")
