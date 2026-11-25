@@ -1,7 +1,7 @@
 import streamlit as st
 from datetime import datetime
 
-st.set_page_config(page_title="UPI Pay — Demo", page_icon="💸", layout="wide")
+st.set_page_config(page_title="UPI Pay ", page_icon="💸", layout="wide")
 
 # DEMO ONLY: This app does not connect to banks, UPI, or payment networks.
 if "balance" not in st.session_state:
