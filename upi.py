@@ -1,9 +1,9 @@
 import streamlit as st
 from datetime import datetime
 
-st.set_page_config(page_title="UPI Pay — Demo", page_icon="💸", layout="wide")
+st.set_page_config(page_title="UPI Pay ", page_icon="💸", layout="wide")
 
-# DEMO ONLY: This app does not connect to banks, UPI, or payment networks.
+
 if "balance" not in st.session_state:
     st.session_state.balance = 11050.00
 if "transactions" not in st.session_state:
@@ -20,8 +20,8 @@ st.markdown("""
 .hero {background:linear-gradient(120deg,#4f20d8,#7856f4);padding:24px;border-radius:18px;color:white;}
 .hero h1 {color:white;margin:0;} .hero p {margin-bottom:0;}
 </style>
-<div class="demo-banner">DEMO SIMULATOR — No real money or bank connection</div>
-<div class="hero"><h1>💸 UPI Pay</h1><p>Pay. Send. Receive. (Simulated)</p><p><b>Demo profile: Basit Abass</b></p></div>
+<div class="demo-banner"></div>
+<div class="hero"><h1>💸 UPI Pay</h1><p>Pay. Send. Receive.</p><p><b>Demo profile: Basit Abass</b></p></div>
 """, unsafe_allow_html=True)
 
 st.subheader("Accounts")
@@ -30,12 +30,12 @@ with left:
     st.markdown("### 🏦 ICICI Bank")
     st.caption("Saving A/c • 0456")
 with right:
-    st.metric("Demo available balance", f"₹{st.session_state.balance:,.2f}")
+    st.metric("Available balance", f"₹{st.session_state.balance:,.2f}")
 
 st.subheader("Quick actions")
 a, b, c = st.columns(3)
 a.button("➤ Send money", use_container_width=True)
-b.button("▦ Scan & pay (disabled)", disabled=True, use_container_width=True)
+b.button("▦ Scan & pay", disabled=False, use_container_width=True)
 c.button("↓ Receive money", use_container_width=True)
 
 st.subheader("Demo transfer")
