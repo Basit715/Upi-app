@@ -14,6 +14,8 @@ if "transactions" not in st.session_state:
     ]
 if "selected_recipient" not in st.session_state:
     st.session_state.selected_recipient = ""
+if "show_balance" not in st.session_state:
+    st.session_state.show_balance = False
 
 st.markdown("""
 <style>
@@ -75,10 +77,24 @@ for col, (emoji, label) in zip(qcols, items):
 
 st.write("")
 pillcols = st.columns(3, gap="small")
-pilllabels = ["🏦 Balance\\nCheck", "🟢 History\\nSee all", "🚀 UPI Demo"]
-for col, label in zip(pillcols, pilllabels):
-    with col:
-        st.markdown(f'<div class="pill">{label.replace(chr(10), "<br>")}</div>', unsafe_allow_html=True)
+with pillcols[0]:
+    if st.button("🏦  Balance Check", key="balance_check", use_container_width=True):
+        st.session_state.show_balance = not st.session_state.show_balance
+with pillcols[1]:
+    st.markdown('<div class="pill">🟢 History<br>See all</div>', unsafe_allow_html=True)
+with pillcols[2]:
+    st.markdown('<div class="pill">🚀 UPI Demo</div>', unsafe_allow_html=True)
+
+if st.session_state.show_balance:
+    st.markdown(f"""
+    <div class="tx" style="border:1px solid #1d5db5;background:#17243a">
+      <div style="font-weight:800">🏦 ICICI Bank • Demo account</div>
+      <div class="small">Account ending •••• 0456</div>
+      <div class="small" style="margin-top:10px">Simulated balance</div>
+      <div style="font-size:1.8rem;font-weight:900;color:#8ab4ff">₹{st.session_state.balance:,.2f}</div>
+      <div class="small">DEMO ONLY — Not a real bank balance</div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # Contacts: fictional names and local simulation only
 st.markdown('<div class="section-title">Send money <span style="color:#1688ff">› See all</span></div>', unsafe_allow_html=True)
@@ -137,4 +153,3 @@ st.markdown("""
   Independent demo • No real bank/payment connection • Not affiliated with Google Pay or NPCI
 </div>
 """, unsafe_allow_html=True)
-                               
