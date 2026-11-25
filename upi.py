@@ -1,9 +1,9 @@
 import streamlit as st
 from datetime import datetime
 
-st.set_page_config(page_title="UPI Demo • Basit Abass", page_icon="💳", layout="centered")
+st.set_page_config(page_title="Basit Abass", page_icon="💳", layout="centered")
 
-# Simulation-only UI. No bank, UPI, QR, or payment-network connection.
+
 if "balance" not in st.session_state:
     st.session_state.balance = 11050.00
 if "transactions" not in st.session_state:
@@ -32,7 +32,7 @@ div[data-testid="stMarkdownContainer"] p {color:#f2f2f2;}
 .scenic {height:150px;border-radius:18px;margin:6px 0 16px;
  background:linear-gradient(180deg,#151b2b 0%,#20283a 42%,#063b2b 43%,#07502e 75%,#064223 100%);
  position:relative;overflow:hidden;border:1px solid #1c1c1c;}
-.scenic:before {content:'🌙     ▪ ▪ ▪ ▪ ▪       ▪ ▪ ▪ ▪';position:absolute;top:18px;left:16px;color:#ffbf4a;}
+.scenic:before {content:'gpay lite';position:absolute;top:18px;left:16px;color:#ffbf4a;}
 .scenic:after {content:'🏛️                         🏪 🧍';position:absolute;bottom:12px;left:15px;font-size:28px;}
 .demo-banner {background:#153a74;border:1px solid #1d5db5;color:#e8f1ff;
  border-radius:14px;padding:11px 13px;text-align:center;font-weight:900;margin-bottom:15px;}
@@ -64,13 +64,13 @@ footer {visibility:hidden;}
 """, unsafe_allow_html=True)
 
 # Top search-style field and profile
-st.markdown('<div class="searchbox">🔎 &nbsp; Pay friends and demo merchants &nbsp;&nbsp;&nbsp; <b>🟦 B</b></div>', unsafe_allow_html=True)
+st.markdown('<div class="searchbox">🔎 &nbsp; Pay friends and merchants &nbsp;&nbsp;&nbsp; <b>🟦 B</b></div>', unsafe_allow_html=True)
 st.markdown('<div class="demo-note">DEMO ONLY — NO REAL PAYMENTS</div>', unsafe_allow_html=True)
 st.markdown('<div class="scenic"></div>', unsafe_allow_html=True)
 
 # Four quick action tiles
 qcols = st.columns(4, gap="small")
-items = [("▦", "Scan demo\\nQR"), ("₹↗", "Pay\\ndemo"), ("🏛", "Bank\\ndemo"), ("▣", "Mobile\\nrecharge")]
+items = [("▦", "Scan QR"), ("₹↗", "Pay"), ("🏛", "Bank"), ("▣", "Mobile recharge")]
 for col, (emoji, label) in zip(qcols, items):
     with col:
         st.markdown(f'<div class="quick-card"><span class="emoji">{emoji}</span><b>{label.replace(chr(10), "<br>")}</b></div>', unsafe_allow_html=True)
@@ -88,15 +88,15 @@ with pillcols[2]:
 if st.session_state.show_balance:
     st.markdown(f"""
     <div class="tx" style="border:1px solid #1d5db5;background:#17243a">
-      <div style="font-weight:800">🏦 ICICI Bank • Demo account</div>
+      <div style="font-weight:800">🏦 ICICI Bank</div>
       <div class="small">Account ending •••• 0456</div>
-      <div class="small" style="margin-top:10px">Simulated balance</div>
+      <div class="small" style="margin-top:10px">balance</div>
       <div style="font-size:1.8rem;font-weight:900;color:#8ab4ff">₹{st.session_state.balance:,.2f}</div>
-      <div class="small">DEMO ONLY — Not a real bank balance</div>
+      <div class="small"></div>
     </div>
     """, unsafe_allow_html=True)
 
-# Contacts: fictional names and local simulation only
+
 st.markdown('<div class="section-title">Send money <span style="color:#1688ff">› See all</span></div>', unsafe_allow_html=True)
 contacts = [("S", "Sahil"), ("A", "Ayaan"), ("R", "Rizwan"), ("D", "Danish"), ("K", "Kashif")]
 ccols = st.columns(5, gap="small")
@@ -109,14 +109,14 @@ for col, (initial, name) in zip(ccols, contacts):
 st.markdown('<hr>', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Bills & recharges <span style="color:#1688ff">Manage ›</span></div>', unsafe_allow_html=True)
 billcols = st.columns(4, gap="small")
-billitems = [("📱", "Mobile\\nRecharge"), ("⚡", "Electricity\\nBill"), ("💧", "Water\\nBill"), ("📺", "DTH\\nRecharge")]
+billitems = [("📱", "Mobile Recharge"), ("⚡", "Electricity Bill"), ("💧", "Water Bill"), ("📺", "DTH Recharge")]
 for col, (emoji, label) in zip(billcols, billitems):
     with col:
         st.markdown(f'<div class="bill">{emoji}<br><b>{label.replace(chr(10), "<br>")}</b></div>', unsafe_allow_html=True)
 
-# The QR action is deliberately a placeholder, not an actual QR/payment flow.
+
 st.write("")
-st.button("▦   Scan QR (demo placeholder)", disabled=True, use_container_width=True)
+st.button("▦   Scan QR ", disabled=False, use_container_width=True)
 
 with st.expander("Demo transfer (simulation)"):
     with st.form("demo_transfer"):
@@ -137,7 +137,7 @@ with st.expander("Demo transfer (simulation)"):
             st.success(f"Demo only: ₹{amount:,.2f} simulated for {recipient}. No money moved.")
             st.rerun()
 
-with st.expander("Demo balance & transaction history"):
+with st.expander("balance & transaction history"):
     st.metric("Simulated balance", f"₹{st.session_state.balance:,.2f}")
     for tx in st.session_state.transactions:
         sign = "+" if tx["kind"] == "Received" else "−"
@@ -147,9 +147,3 @@ with st.expander("Demo balance & transaction history"):
           <div style="margin-top:8px;font-weight:800">{sign} ₹{tx['amount']:,.2f} &nbsp; <span style="color:#62c98a">{tx['status']}</span></div>
         </div>""", unsafe_allow_html=True)
 
-st.markdown("""
-<div style="text-align:center;color:#9a9a9a;font-size:.8rem;padding:20px 4px 10px">
-  UPI-style interface prototype • Basit Abass<br>
-  Independent demo • No real bank/payment connection • Not affiliated with Google Pay or NPCI
-</div>
-""", unsafe_allow_html=True)
