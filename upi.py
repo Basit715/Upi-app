@@ -1,8 +1,7 @@
 import streamlit as st
 from datetime import datetime
 
-st.set_page_config(page_title="UPI Pay ", page_icon="💸", layout="wide")
-
+st.set_page_config(page_title="gpay", page_icon="💸", layout="wide")
 
 if "balance" not in st.session_state:
     st.session_state.balance = 11050.00
@@ -15,13 +14,25 @@ if "transactions" not in st.session_state:
 
 st.markdown("""
 <style>
-.demo-banner {background:#fff3cd;color:#664d03;border:1px solid #ffecb5;
- padding:10px 14px;border-radius:10px;font-weight:700;text-align:center;margin-bottom:15px;}
-.hero {background:linear-gradient(120deg,#4f20d8,#7856f4);padding:24px;border-radius:18px;color:white;}
+.stApp {
+  background:
+    radial-gradient(circle at 8% 4%, #d9e9ff 0, transparent 24%),
+    radial-gradient(circle at 95% 15%, #dff5e8 0, transparent 22%),
+    radial-gradient(circle at 90% 65%, #fff1d2 0, transparent 20%),
+    #f8fbff;
+}
+.block-container {padding-top:1.3rem; max-width:1100px;}
+.demo-banner {background:#e7f0ff;color:#174ea6;border:1px solid #c5dcff;
+ padding:10px 14px;border-radius:14px;font-weight:800;text-align:center;margin-bottom:15px;}
+.hero {background:linear-gradient(120deg,#4285f4,#34a853 55%,#fbbc05 78%,#ea4335);
+ padding:24px;border-radius:22px;color:white;box-shadow:0 8px 22px #9db8ef55;}
 .hero h1 {color:white;margin:0;} .hero p {margin-bottom:0;}
+div[data-testid="stMetric"] {background:white;padding:14px;border-radius:18px;
+ border:1px solid #e4ecff;box-shadow:0 4px 12px #9db8ef22;}
+div[data-testid="stVerticalBlockBorderWrapper"] {border-radius:18px;}
 </style>
 <div class="demo-banner"></div>
-<div class="hero"><h1>💸 UPI Pay</h1><p>Pay. Send. Receive.</p><p><b>Basit Abass</b></p></div>
+<div class="hero"><h1>💠 </h1><p>Pay. Send. Receive. (Simulated)</p><p><b>Basit Abass</b></p></div>
 """, unsafe_allow_html=True)
 
 st.subheader("Accounts")
@@ -38,7 +49,7 @@ a.button("➤ Send money", use_container_width=True)
 b.button("▦ Scan & pay", disabled=False, use_container_width=True)
 c.button("↓ Receive money", use_container_width=True)
 
-st.subheader("Demo transfer")
+st.subheader("transfer")
 with st.form("transfer_form"):
     recipient = st.text_input("Recipient name")
     amount = st.number_input("Amount (₹)", min_value=1.0, max_value=100000.0, step=1.0)
@@ -49,14 +60,14 @@ if submitted:
     if not recipient.strip():
         st.warning("Enter a recipient name to run the simulation.")
     elif amount > st.session_state.balance:
-        st.error("Insufficient demo balance.")
+        st.error("Insufficient  balance.")
     else:
         st.session_state.balance -= amount
         st.session_state.transactions.insert(0, {
             "name": recipient.strip(), "amount": amount, "kind": "Sent",
-            "status": "Demo success", "time": datetime.now().strftime("%d %b, %I:%M %p")
+            "status": "success", "time": datetime.now().strftime("%d %b, %I:%M %p")
         })
-        st.success(f"Demo transfer of ₹{amount:,.2f} to {recipient} simulated. No payment was made.")
+        st.success(f"transfer of ₹{amount:,.2f} to {recipient} simulated. No payment was made.")
         st.rerun()
 
 st.subheader("Shortcuts")
@@ -72,4 +83,4 @@ for tx in st.session_state.transactions:
         sign = "+" if tx["kind"] == "Received" else "−"
         y.markdown(f"**{sign} ₹{tx['amount']:,.2f}**  \n{tx['status']}")
 
-st.caption("Educational UI prototype. Not affiliated with ICICI Bank, NPCI, or Paytm. No real payment, QR scanning, authentication, or banking API is implemented.")
+
